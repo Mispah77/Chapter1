@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[1]:Importing required libraries
 
 
 import numpy as np
@@ -17,50 +17,50 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[3]:
+# In[3]:Loading the dataset
 
 
 df = pd.read_csv('data.csv',encoding = 'ISO-8859-1')
 
 
-# In[4]:
+# In[4]:Displaying the dataframe
 
 
 print(df)
 
 
-# In[5]:
+# In[5]:Displaying no.of rows and columns
 
 
 df.shape
 
 
-# In[6]:
+# In[6]:Access first five rows
 
 
 df.head()
 
 
-# In[7]:
+# In[7]:Access last five rows
 
 
 df.tail()
 
 
-# In[8]:
+# In[8]:Displaying total columns from the dataset
 
 
 df.columns
 
 
-# In[9]:
+# In[9]:Displaying all columns one by one
 
 
 for column in df.columns:
     print(column)
 
 
-# In[10]:
+# In[10]:Renaming columns names
 
 
 d = {'InvoiceNo' : 'invoice_num',
@@ -72,141 +72,120 @@ d = {'InvoiceNo' : 'invoice_num',
      'CustomerID' : 'cust_id',
      'Country' : 'country'}
 
-
-# In[11]:
-
-
 df.rename(columns = d,inplace = True)
 
 
-# In[12]:
+# In[11]:After changing checking new column names
 
 
 df.columns
-
-
-# In[13]:
-
 
 for i in df.columns:
     print(i)
 
 
-# In[14]:
+# In[12]:Checking initial data
 
 
 df.head()
 
+# Data Cleaning
 
-# In[15]:
+# In[13]:Checking column types
 
 
 df.dtypes
 
 
-# In[16]:
+# In[14]:DataFrame Information
 
 
 df.info()
 
 
-# In[17]:
+# In[15]:Checking missing values for each column
 
 
 df.isnull()
 
 
-# In[18]:
+# In[16]:Checking no.of columns
 
 
 len(df.columns)
 
 
-# In[19]:
+# In[17]:Displaying no.of rows and columns
 
 
 df.shape
 
 
-# In[20]:
+# In[18]:Checking missing values count on each column
 
 
 df.isnull().sum()
 
 
-# In[21]:
+# In[19]:Checking missing values count on each column,applying sort
 
 
 df.isnull().sum().sort_values()
 
-
-# In[22]:
-
-
 df.isnull().sum().sort_values(ascending = False)
 
 
-# In[23]:
+# In[20]:Accessing initial data
 
 
 df.head(2)
 
 
-# In[24]:
+# In[21]:Checking type of invoice_date column
 
 
 df.dtypes
 
 
-# In[25]:
+# In[22]:Converting invoice_date datatype into datetime datatype
 
 
 df['invoice_date'] = pd.to_datetime(df.invoice_date,format = '%m/%d/%Y %H:%M')
 
 
-# In[26]:
+# In[23]:Checking type of invoice_date
 
 
 df.dtypes
 
 
-# In[27]:
+# In[24]:Access the first five rows
 
 
 df.head()
 
 
-# In[28]:
+# In[25]:Checking description column
 
 
 df.description
 
 
-# In[29]:
+# In[26]:Converting description column to lower() method
 
 
 df.description.str.lower()
 
-
-# In[30]:
-
-
-df.head(3)
-
-
-# In[31]:
-
-
 df['description'] = df.description.str.lower()
 
 
-# In[32]:
+# In[27]:Access the initial data
 
 
 df.head(3)
 
 
-# In[33]:
+# In[28]:Missing values
 
 
 df.isnull().sum().sort_values(ascending = False)
