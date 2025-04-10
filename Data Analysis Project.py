@@ -141,7 +141,7 @@ df.isnull().sum().sort_values(ascending = False)
 df.head(2)
 
 
-# In[21]:Checking type of invoice_date column
+# In[21]:Checking column datatypes
 
 
 df.dtypes
@@ -191,389 +191,296 @@ df.head(3)
 df.isnull().sum().sort_values(ascending = False)
 
 
-# In[34]:
+# In[29]:Dropping missing values
 
 
 df_new = df.dropna()
 
 
-# In[35]:
+# In[30]:After dropping again checking missing values
 
 
 df_new.isnull().sum()
 
 
-# In[36]:
+# In[31]:Dataframe Information
 
 
 df_new.info()
 
 
-# In[37]:
+# In[32]:Access initial data
 
 
 df_new.head()
 
 
-# In[38]:
+# In[33]:Checking column datatypes
 
 
 df_new.dtypes
 
 
-# In[39]:
+# In[34]:Checking type of cust_id
 
 
 df_new['cust_id']
 
 
-# In[40]:
+# In[35]:Converting cust_id float type into integer type 
 
 
 df_new['cust_id'] = df_new['cust_id'].astype('int64')
 
 
-# In[41]:
+# In[36]:Accessing first five rows
 
 
 df_new.head()
 
 
-# In[42]:
+# In[37]:Dataframe Information
 
 
 df_new.info()
 
 
-# In[43]:
+# In[38]:Dataframe Statistical description
 
 
 df_new.describe()
 
 
-# In[44]:
+# In[39]:Rounding the values in dataframe
 
 
 df_new.describe().round(2)
 
 
-# In[45]:
+# In[40]:Removing negative values from quantity column
 
 
 df_new.quantity > 0
 
-
-# In[46]:
-
-
 con = df_new.quantity > 0
 
-
-# In[47]:
-
-
 df_new = df_new[con]
-
-
-# In[48]:
-
 
 df_new.describe().round(2)
 
 
-# In[49]:
+# In[41]:Access initial data
 
 
 df_new.head()
 
 
-# In[50]:
+# In[42]:Checking total no.of rows and columns
 
 
 df_new.shape
 
 
-# In[51]:
+# In[43]:Adding the column - amount_spent
 
 
 df_new['amount_spent'] = df_new['quantity']*df_new['unit_price']
 
 
-# In[52]:
+# In[44]:Access initial data
 
 
 df_new.head()
 
 
-# In[53]:
+# In[45]:Access column names from Dataframe
 
 
 for col in df.columns:
     print(col)
 
 
-# In[54]:
+# In[46]:Rearranging column names
 
 
 col_order = ['invoice_num','invoice_date','stock_code','description','quantity','unit_price','amount_spent','cust_id','country']
 
-
-# In[55]:
-
-
 df_new = df_new[col_order]
 
 
-# In[56]:
+# In[47]:Access initial data
 
 
 df_new.head()
 
 
-# In[57]:
+# In[48]:Access no.of rows and columns
 
 
 df_new.shape
 
 
-# In[58]:
+# In[49]:Access total no.of columns in the dataframe 
 
 
 len(df_new.columns)
 
 
-# In[59]:
+# In[50]:Access invoice_date column
 
 
 df_new['invoice_date']
 
-
-# In[60]:
-
-
 df_new.invoice_date
 
 
-# In[61]:
+# In[51]:Access year value from invoice_date column
 
 
 df_new['invoice_date'].dt.year
 
 
-# In[62]:
+# In[52]:Access month value from invoice_date column
 
 
 df_new['invoice_date'].dt.month
 
 
-# In[63]:
+# In[53]:Access initial data
 
 
 df_new.head(2)
 
 
-# In[65]:
+# In[54]:Inserting year_month column in 2nd position
 
 
 c1 = 'year_month'
 
-
-# In[66]:
-
-
 v1 = df_new['invoice_date'].map(lambda col:100*(col.year)+col.month)
 
-
-# In[67]:
-
-
 df_new.insert(loc=2,column=c1,value=v1)
-
-
-# In[68]:
-
 
 df_new
 
 
-# In[69]:
+# In[55]:Access initial data
 
 
 df_new.head()
 
 
-# In[70]:
+# In[56]:Adding month column to the existing dataframe
 
 
 c2 = 'month'
 
-
-# In[71]:
-
-
 v2 = df_new.invoice_date.dt.month
-
-
-# In[72]:
-
 
 df_new.insert(loc=3,column=c2,value=v2)
 
 
-# In[73]:
+# In[57]:Access initial data
 
 
 df_new.head()
 
 
-# In[74]:
+# In[58]:Access final data
 
 
 df_new.tail()
 
 
-# In[75]:
+# In[59]:Access invoice_date column
 
 
 df_new.invoice_date
 
 
-# In[76]:
+# In[60]:Access day of the week
 
 
 df_new.invoice_date.dt.dayofweek
 
 
-# In[77]:
+# In[61]:In pandas the day formate starts from 0 to 6
+         Apply +1 to make Monday=1....until Sunday=7
 
 
 c3='day'
 
-
-# In[78]:
-
-
 v3=(df_new.invoice_date.dt.dayofweek)+1
-
-
-# In[79]:
-
 
 df_new.insert(loc=4,column=c3,value=v3)
 
 
-# In[80]:
+# In[62]:Access initial data
 
 
 df_new.head()
 
 
-# In[81]:
+# In[63]:Access invoice_date column
 
 
 df_new.invoice_date
 
 
-# In[82]:
+# In[64]:Adding hour column to the existing dataframe
 
 
 df_new.invoice_date.dt.hour
 
-
-# In[83]:
-
-
 c4='hour'
 
-
-# In[84]:
-
-
 v4=df_new.invoice_date.dt.hour
-
-
-# In[85]:
-
 
 df_new.insert(loc=5,column=c4,value=v4)
 
 
-# In[86]:
+# In[65]:Access initial data
 
 
 df_new.head()
 
 
-# In[87]:
+# In[66]:Display columnnames
 
 
 df_new.columns
-
-
-# In[88]:
-
 
 for col in df_new.columns:
     print(col)
 
 
-# In[89]:
+# In[67]:Exploratory Data Analysis
 
 
 df_new.groupby(by=['cust_id']).count()
 
-
-# In[90]:
-
-
 df_new.groupby(by=['cust_id','country']).count()
-
-
-# In[91]:
-
 
 df_new.groupby(by=['cust_id','country'])['invoice_num'].count()
 
-
-# In[92]:
-
-
 df_new.groupby(by=['cust_id','country'],as_index=False)['invoice_num'].count()
-
-
-# In[93]:
-
 
 df_new.groupby(by=['cust_id','country'],as_index=False)['invoice_num'].count().head()
 
-
-# In[95]:
-
-
 orders=df_new.groupby(by=['cust_id','country'],as_index=False)['invoice_num'].count()
-
-
-# In[96]:
-
 
 orders
 
 
-# In[97]:
+# In[68]:Check top 5 most no.of orders
 
 
 orders.sort_values(by='invoice_num',ascending=False).head()
 
 
-# In[98]:
-
+# In[69]:Visualizing - No.of orders for different customers
 
 orders=df_new.groupby(by=['cust_id','country'],as_index=False)['invoice_num'].count()
-
-
-# In[100]:
-
-
 plt.subplots(figsize=(15,6))
 plt.plot(orders.cust_id,orders.invoice_num)
 plt.xlabel('CustomersID')
@@ -582,57 +489,36 @@ plt.title('Number of Orders for different Customers')
 plt.show()
 
 
-# In[101]:
+# In[70]:Money spent by each customer
 
 
 df_new.groupby(by=['cust_id','country']).sum()
 
-
-# In[102]:
-
-
 df_new.groupby(by=['cust_id','country'])['amount_spent'].sum()
-
-
-# In[103]:
-
 
 df_new.groupby(by=['cust_id','country'],as_index=False)['amount_spent'].sum()
 
-
-# In[104]:
-
-
 money_spent=df_new.groupby(by=['cust_id','country'],as_index=False)['amount_spent'].sum()
-
-
-# In[105]:
-
 
 money_spent
 
 
-# In[106]:
+# In[71]:Check top 5 customers who spent highest money
 
 
 money_spent.sort_values(by='amount_spent',ascending=False).head()
 
 
-# In[107]:
+# In[72]:Check top ten customers who spent highest money
 
 
 money_spent.sort_values(by='amount_spent',ascending=False).head(10)
 
 
-# In[115]:
+# In[73]:Visualizing - Money spent for different customers
 
 
 money_spent=df_new.groupby(by=['cust_id','country'],as_index=False)['amount_spent'].sum()
-
-
-# In[116]:
-
-
 plt.subplots(figsize=(15,6))
 plt.plot(money_spent.cust_id,money_spent.amount_spent)
 plt.xlabel('CustomersID')
@@ -641,20 +527,16 @@ plt.title('Money Spent by different Customers')
 plt.show()
 
 
-# In[117]:
+# In[74]:Access initial data
 
 
 df_new.head()
 
 
-# In[118]:
+# In[75]:No.of orders for different months
 
 
 color=sns.color_palette()
-
-
-# In[120]:
-
 
 ax=df_new.groupby('invoice_num')['year_month'].unique().value_counts().sort_index().plot(kind='bar',color=color[0],figsize=(15,6))
 ax.set_xlabel('Month and Year',fontsize=15)
@@ -665,25 +547,17 @@ ax.set_xticklabels(t,rotation='horizontal',fontsize=13)
 plt.show()
 
 
-# In[157]:
+# In[76]:No.of orders per day
 
 
 df_new.groupby('invoice_num')
 
-
-# In[158]:
-
-
 df_new.groupby('invoice_num')['day']
-
-
-# In[159]:
-
 
 df_new.groupby('invoice_num')['day'].unique()
 
 
-# In[164]:
+# In[77]:Day wise sales bussiness
 
 
 ax=df_new.groupby('invoice_num')['day'].unique().value_counts().sort_index().plot(kind='bar',color=color[0],figsize=(15,6))
@@ -695,40 +569,24 @@ ax.set_xticklabels(d,rotation='horizontal',fontsize=15)
 plt.show()
 
 
-# In[165]:
+# In[78]:Statistical description for unit price
 
 
 df_new.unit_price.describe()
 
 
-# In[168]:
+# In[79]:Check the distribution of unit price
 
 
 plt.subplots(figsize=(12,6))
 sns.boxplot(df_new.unit_price)
 plt.show()
 
-
-# In[167]:
-
-
 df_free=df_new[df_new.unit_price==0]
-
-
-# In[169]:
-
 
 df_free
 
-
-# In[170]:
-
-
 df_free.year_month.value_counts().sort_index()
-
-
-# In[173]:
-
 
 ax=df_free.year_month.value_counts().sort_index().plot(kind='bar',color=color[0],figsize=(12,6))
 ax.set_xlabel('Month',fontsize=15)
@@ -739,14 +597,10 @@ ax.set_xticklabels(m,rotation='horizontal',fontsize=13)
 plt.show()
 
 
-# In[174]:
+# In[80]:No.of orders for each country
 
 
 group_country_orders=df_new.groupby('country')['invoice_num'].count().sort_values()
-
-
-# In[175]:
-
 
 plt.subplots(figsize=(15,8))
 group_country_orders.plot(kind='barh',fontsize=12,color=color[0])
@@ -756,21 +610,10 @@ plt.title('Number of Orders for different Countries',fontsize=12)
 plt.show()
 
 
-# In[176]:
-
-
 group_country_orders=df_new.groupby('country')['invoice_num'].count().sort_values()
-
-
-# In[177]:
-
 
 del group_country_orders['United Kingdom']
 
-
-# In[178]:
-
-
 plt.subplots(figsize=(15,8))
 group_country_orders.plot(kind='barh',fontsize=12,color=color[0])
 plt.xlabel('Number of Orders',fontsize=12)
@@ -779,14 +622,10 @@ plt.title('Number of Orders for different Countries',fontsize=12)
 plt.show()
 
 
-# In[179]:
+# In[81]:Money spent by each country
 
 
 group_country_amount_spent=df_new.groupby('country')['amount_spent'].sum().sort_values()
-
-
-# In[180]:
-
 
 plt.subplots(figsize=(15,8))
 group_country_amount_spent.plot(kind='barh',fontsize=12,color=color[0])
@@ -796,21 +635,10 @@ plt.title('Money Spent by different Countries',fontsize=12)
 plt.show()
 
 
-# In[181]:
-
-
 group_country_amount_spent=df_new.groupby('country')['amount_spent'].sum().sort_values()
-
-
-# In[182]:
-
 
 del group_country_amount_spent['United Kingdom']
 
-
-# In[183]:
-
-
 plt.subplots(figsize=(15,8))
 group_country_amount_spent.plot(kind='barh',fontsize=12,color=color[0])
 plt.xlabel('Money Spent(Dollar)',fontsize=12)
@@ -819,7 +647,7 @@ plt.title('Money Spent by different Countries',fontsize=12)
 plt.show()
 
 
-# In[ ]:
+# This is Data Analysis
 
 
 
